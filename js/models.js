@@ -76,6 +76,7 @@ class StoryList {
   async addStory(user, newStory) {
     const res = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories',{story:{author:newStory.author, title:newStory.title, url:newStory.url},token:user.loginToken})
     storyList = await StoryList.getStories();
+    currentUser.ownStories.push(new Story(res.data.story))
     putStoriesOnPage();
     return res;
   }
